@@ -1,10 +1,21 @@
-function Person (fname, lname){
-	this.firstname = fname,
-	this.lastname = lname
+//pass by value
+function change (b){
+	b=2;
+	console.log(b);
 }
 
-var john = new Person("John", "Doe"); 
-console.log(john.firstname);
+var a =1;
+change(a);
+console.log(a);
 
 
-console.log(john.__proto__);
+//pass by reference
+
+function changeObj(d){
+	d.prop1 = "green",
+	d.prop2 = {}
+}
+var c = {};
+console.log(c);
+changeObj(c);
+console.log(c);
