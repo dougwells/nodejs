@@ -1,28 +1,10 @@
-//function statement
-function greet(){
-	console.log("Hello World!");
+function Person (fname, lname){
+	this.firstname = fname,
+	this.lastname = lname
 }
-greet();
 
-// funcitons are first-class.  Can pass fn as a parameter
-function logGreeting(fn){
-	fn();
-}
-logGreeting(greet);
+var john = new Person("John", "Doe"); 
+console.log(john.firstname);
 
-//function expression
-var greetMe = function(){
-	console.log('Hello Doug');
-};
 
-greetMe();
-logGreeting(greetMe);
-
-//Use a function expression on the fly
-
-logGreeting(
-	function(){
-		console.log("Hello Doug ... functions gone wild!");
-	}
-);
-
+console.log(john.__proto__);
