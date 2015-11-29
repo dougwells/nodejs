@@ -13,7 +13,8 @@ logGreeting(greet);
 //function expression
 var greetMe = function(){
 	console.log('Hello Doug');
-}
+};
+
 greetMe();
 logGreeting(greetMe);
 
@@ -24,3 +25,4 @@ logGreeting(
 		console.log("Hello Doug ... functions gone wild!");
 	}
 );
+
