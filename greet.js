@@ -1,1 +1,5 @@
-console.log("Hello World!")
+var greet = function(){
+	console.log("Hello World!");
+}
+
+module.exports = greet;
