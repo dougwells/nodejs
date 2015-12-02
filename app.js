@@ -1,22 +1,23 @@
 'use strict';
 
-class Person {
-	constructor(firstname, lastname) {
-		this.firstname = firstname;
-		this.lastname = lastname;
+var EventEmitter = require('events');
+
+class Greetr extends EventEmitter{
+	constructor(){
+		super();
+		this.greeting = 'Hello world!';
+	}
+	greet (data){
+		console.log(`${this.greeting} My friend is ${data}`);
+		this.emit('greet', data);
 	}
 	
-	greet() {
-		console.log('Hello, ' + this.firstname + ' ' + this.lastname);
-	}
 }
 
-var john = new Person('John', 'Doe');
-john.greet();
+var greeter1 = new Greetr();
 
-var jane = new Person('Jane', 'Doe');
-jane.greet();
+greeter1.on('greet', function(data) {
+	console.log('Someone greeted!: ' + data);
+});
 
-console.log(john.__proto__);
-console.log(jane.__proto__);
-console.log(john.__proto__ === jane.__proto__);
+greeter1.greet('Tony');
