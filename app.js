@@ -1,29 +1,22 @@
-var EventEmitter = require('events');
-var util = require('util');
+'use strict';
 
-function Greetr (){
-	EventEmitter.call(this);
+class Person {
+	constructor(firstname, lastname) {
+		this.firstname = firstname;
+		this.lastname = lastname;
+	}
+	
+	greet() {
+		console.log('Hello, ' + this.firstname + ' ' + this.lastname);
+	}
 }
 
-util.inherits(Greetr, EventEmitter);
+var john = new Person('John', 'Doe');
+john.greet();
 
-Greetr.prototype.greeting = "Hello World";
+var jane = new Person('Jane', 'Doe');
+jane.greet();
 
-Greetr.prototype.greet = function(param){
-	console.log(this.greeting + " from:"+ param);
-	this.emit('greet', param);
-}
-
-var greeter1 = new Greetr;
-greeter1.on('greet', function(param){
-	console.log("Someone Named "+param + " Greeted")
-});
-
-var greeter2 = new Greetr;
-greeter2.on('greet', function(param){
-	console.log("Someone Named "+param + " Greeted")
-});
-
-greeter1.greet("Doug");
-greeter2.greet("Linda")
-console.log(Greetr.prototype.greeting);
+console.log(john.__proto__);
+console.log(jane.__proto__);
+console.log(john.__proto__ === jane.__proto__);
