@@ -1,16 +1,11 @@
-function greet(callback){
-	console.log("Hello");
-	var param = {
-		name: "John Doe"
-	}
-	callback(param);
-}
+var fs = require('fs');
 
-greet(function(param){
-	console.log("The callback was invoked by " + param);
-	console.log(param);
-});
+var greet = fs.readFileSync(__dirname + '/greet1.txt', 'utf8');
+console.log(greet);
 
-greet(function(param){
-	console.log("Callback2 was invoked by" + param.name);
-});
+var greet2 = fs.readFile(__dirname + '/greet2.txt', 'utf8', 
+	function(err, data){
+		console.log(data);
+	});
+
+console.log("Line 11 of code just ran ...");
