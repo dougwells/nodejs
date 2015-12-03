@@ -1,11 +1,10 @@
 var fs = require('fs');
 
-var greet = fs.readFileSync(__dirname + '/greet1.txt', 'utf8');
-console.log(greet);
+var readable = fs.createReadStream(__dirname + '/greet.txt', { encoding: 'utf8', highWaterMark: 16 * 1024 });
 
-var greet2 = fs.readFile(__dirname + '/greet2.txt', 'utf8', 
-	function(err, data){
-		console.log(data);
-	});
+var writable = fs.createWriteStream(__dirname + '/greetcopy.txt');
 
-console.log("Line 11 of code just ran ...");
+readable.on('data', function(param) {
+	console.log(param.length);
+	writable.write(param);
+});
