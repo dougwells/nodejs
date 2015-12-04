@@ -12,7 +12,7 @@ http.createServer(function(req, res){
 	else if(req.url ==="/api"){
 		res.writeHead(200, {"Content-Type": "application/json"});
 		var testData = {
-			firstname: "John",
+			firstname: "Jane",
 			lastname: "Doe"
 		};
 		res.end(JSON.stringify(testData));

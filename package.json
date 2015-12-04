@@ -6,7 +6,9 @@
   "dependencies": {
     "moment": "^2.10.6"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "jasmine-node": "^1.14.5"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
