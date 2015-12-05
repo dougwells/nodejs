@@ -24,24 +24,23 @@ if no route specified, fn runs on ALL request to port
 
 app.use('/assets', express.static(__dirname + '/public'));
 
-app.use('/', function(req, res, next){
-  console.log("Request URL : " + req.url);
-  next();
-});
+//Sets ejs as view engine.  Put view.ejs files in folder "views"
+app.set('view engine', 'ejs');
 
 /** Routing.  Thru app/express can have all 4 HTTP verbs
 (GET, POST, PUT, DELETE) on ONE URL.  Note no "content-type"
 Express takes care of that for me
+Can use ".render" b/c of ejs view engine
 */
 
 app.get('/', function(req, res){
-  res.send('<html><head><link href=assets/style.css type=text/css rel=stylesheet /></head><body><h1>Hello CSS World</h1></body></html>');
+  res.render('index');
 });
 
 // ":" -> can be anything.  Variable is in the request (req) and
 // can access via params object.  Can have multiple vars (page & id)
-app.get('/person/:page/:id', function(req, res){
-  res.send('<html><head></head><body><h1>Hello from Person ' + req.params.id + 'Page #' + req.params.page + '</h1></body></html>');
+app.get('/person/:id', function(req, res){
+  res.render('person', {ID: req.params.id, Qstr: req.query.qvar});
 });
 
 app.get('/api', function(req, res){
