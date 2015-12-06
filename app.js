@@ -8,12 +8,16 @@ app.listen = function listen() {
   return server.listen.apply(server, arguments);};
 */
 var express = require('express');
+
+// Body-parser is Express middleware.  Parses POST Parameters
 var bodyParser = require('body-parser');
 var app = express();
 
 // create application/x-www-form-urlencoded parser
-var urlencodedParser = bodyParser.urlencoded({ extended: false })
+var urlencodedParser = bodyParser.urlencoded({ extended: false });
 
+// create application/json parser
+var jsonParser = bodyParser.json();
 
 //Environment Variable.  Can be set by server configuration.
 // || 3000 is "trick" to set default value if none.
@@ -43,14 +47,21 @@ app.get('/', function(req, res){
 
 // ":" -> can be anything. Var on req.params object.  Mult. vars ok
 //Query String Variables -> the ?varName="Doug" or the ?qvar=123 in URL Bar
-app.get('/person/:id', function(req, res){
-  res.render('person', {ID: req.params.id, Qstr: req.query.qvar, Qname:req.query.qname});
+app.get('/person/:id/:name', function(req, res){
+  res.render('person', {ID: req.params.id, Name:req.params.name, Qstr: req.query.qstr, Qvar:req.query.qvar});
 });
 
-app.post('/person', urlencodedParser, function(req, res){
-  if (!req.body) return res.sendStatus(400)
+
+//Body-Parser.  Use w/webforms.  Parses POST BODY. Middleware w/urlencodedParser
+app.post('/survey', urlencodedParser, function(req, res){
   res.send('Welcome, ' + req.body.firstname+ "!")
   console.log(req.body.lastname +" Logged In.")
+});
+
+// POST /api/users gets JSON bodies
+app.post('/personjson', jsonParser, function (req, res) {
+  console.log("Amigo "+ req.body.lastname+" sent JSON");
+  // create user in req.body
 });
 
 app.get('/api', function(req, res){
