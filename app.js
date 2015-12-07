@@ -9,6 +9,7 @@ app.listen = function listen() {
 */
 var express = require('express');
 var app = express();
+var mysql = require('mysql');
 
 //API controller we built
 var apiController = require('./controllers/apiController');
@@ -24,6 +25,17 @@ app.use('/assets', express.static(__dirname + '/public'));
 
 //Sets ejs as view engine.  Put view.ejs files in folder "views"
 app.set('view engine', 'ejs');
+
+// app.use('/', function(req, res, next){
+//   console.log('Request URL: ' + req.url);
+//   var con = mysql.createConnection({
+//     host: 'localhost',
+//     user: 'test',
+//     password: 'test',
+//     database: 'addressbook'
+//   });
+//   next();
+//  });
 
 /** Routing.  Thru app/express can have all 4 HTTP verbs
 (GET, POST, PUT, DELETE) on ONE URL.  Note no "content-type"
